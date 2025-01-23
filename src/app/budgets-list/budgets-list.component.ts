@@ -5,6 +5,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { BudgetService } from '../services/budget.service';
 @Component({
   selector: 'app-budgets-list',
   imports: [ReactiveFormsModule],
@@ -12,11 +13,11 @@ import {
   styleUrl: './budgets-list.component.scss',
 })
 export class BudgetsListComponent {
-  totalPrice = 0;
+  totalPriceBudget = 0;
 
   formBudget!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private budgetService: BudgetService) {
     this.initializeForm();
   }
 
@@ -28,11 +29,9 @@ export class BudgetsListComponent {
     });
   }
 
-  calculateTotalPrice() {
-    const prices = { seo: 300, ads: 400, web: 500 };
-    this.totalPrice =
-      (this.formBudget.value.seo ? prices.seo : 0) +
-      (this.formBudget.value.ads ? prices.ads : 0) +
-      (this.formBudget.value.web ? prices.web : 0);
+  calculateTotal() {
+    this.totalPriceBudget = this.budgetService.calculateTotalPrice(
+      this.formBudget
+    );
   }
 }
