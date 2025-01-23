@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Aconsegueix la millor qualitat</h1>
+    </div>
+    <div class="col-12">
+      <form class="form" [formGroup]="formBudget">
+        <div class="row">
+          <div class="col-6 d-flex align-items-center">
+            <div>
+              <h3>Seo</h3>
+              <p>Programació d'una web responsive completa</p>
+            </div>
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-center">
+            300€
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-end">
+            <input type="checkbox" name="" id="seo" formControlName="seo" (change)="calculateTotal()">
+            <label for="seo" class="ps-2">Afegir</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 d-flex align-items-center">
+            <div>
+              <h3>Ads</h3>
+              <p>Programació d'una web responsive completa</p>
+            </div>
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-center">
+            400€
+          </div>
+          <div class="col-3 col-3 d-flex align-items-center justify-content-end">
+            <input type="checkbox" name="" id="ads" formControlName="ads" (change)="calculateTotal()">
+            <label for="ads" class="ps-2">Afegir</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 d-flex align-items-center">
+            <div>
+              <h3>Web</h3>
+              <p>Programació d'una web responsive completa</p>
+            </div>
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-center">
+            500€
+          </div>
+          <div class="col-3 col-3 d-flex align-items-center justify-content-end">
+            <input type="checkbox" name="" id="web" formControlName="web" (change)="calculateTotal()">
+            <label for="web" class="ps-2">Afegir</label>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-12">
+      <h4 class="text-end">Preu pressuposat: {{ totalPriceBudget }}€</h4>
+    </div>
+  </div>
+</div>
