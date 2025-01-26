@@ -49,6 +49,9 @@
             <input type="checkbox" name="" id="web" formControlName="web" (change)="calculateTotal()">
             <label for="web" class="ps-2">Afegir</label>
           </div>
+          @if (formBudget.get('web')?.value) {
+          <app-panel (updatePagesAndLanguages)="panelUpdate($event)"></app-panel>
+          }
         </div>
       </form>
     </div>
