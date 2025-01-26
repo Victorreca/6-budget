@@ -1,16 +1,20 @@
-<div>
-  <div>
-    <span>
-      Nombre de pàgines <button type="button" class="btn btn-primary w-auto m-1"
-        (click)="decreaseNumberPages()">-</button> <span>
-        {{numberPages}}
-      </span><button type="button" class="btn btn-primary w-auto m-1" (click)="increaseNumberPages()">+</button>
+<div class="text-end">
+  <span class="d-block mb-3">
+    Nombre de pàgines <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberPages()"><img
+        src="assets/signo-menos.png" width="20"></button>
+    <span class="border rounded px-3 py-1">
+      {{numberPages}}
     </span>
-    <span>
-      Nombre d'idiomes <button type="button" class="btn btn-primary w-auto m-1"
-        (click)="descreaseNumberLanguages()">-</button> <span>
-        {{numberLlanguages}}
-      </span><button type="button" class="btn btn-primary w-auto m-1" (click)="increaseNumberLanguages()">+</button>
+    <button type="button" class="border-0 bg-transparent" (click)="increaseNumberPages()"><img src="assets/mas.png"
+        width="20"></button>
+  </span>
+  <span class="d-block">
+    Nombre d'idiomes <button type="button" class="border-0 bg-transparent" (click)="descreaseNumberLanguages()"><img
+        src="assets/signo-menos.png" width="20"></button>
+    <span class="border rounded px-3 py-1">
+      {{numberLlanguages}}
     </span>
-  </div>
+    <button type=" button" class="border-0 bg-transparent" (click)="increaseNumberLanguages()"><img src="assets/mas.png"
+        width="20"></button>
+  </span>
 </div>
