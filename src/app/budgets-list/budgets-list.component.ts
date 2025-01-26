@@ -8,9 +8,10 @@ import {
 import { BudgetService } from '../services/budget.service';
 import { BudgetOption } from '../interfaces/budget-option';
 import { PanelComponent } from '../panel/panel.component';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-budgets-list',
-  imports: [ReactiveFormsModule, PanelComponent],
+  imports: [ReactiveFormsModule, PanelComponent, CommonModule],
   templateUrl: './budgets-list.component.html',
   styleUrl: './budgets-list.component.scss',
 })

@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container pt-5">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 pb-5">
       <h1 class="text-center">Aconsegueix la millor qualitat</h1>
     </div>
     <div class="col-12">
-      <form class="form" [formGroup]="formBudget">
-        @for(option of programmingOptions; track option){
-        <div class="row">
+      <form class="form d-flex flex-column gap-3" [formGroup]="formBudget">
+        @for(option of programmingOptions; track option.id; let lastItem = $last){
+        <div class="row p-3" [ngClass]="{'border-checked shadow': formBudget.get(option.id)?.value, 'mb-5': lastItem}">
           <div class="col-6 d-flex align-items-center">
             <div>
               <h3>{{option.title}}</h3>
@@ -14,7 +14,10 @@
             </div>
           </div>
           <div class="col-3 d-flex align-items-center justify-content-center">
-            {{ option.price }}
+            <div>
+              <span class="fw-prices me-1">
+                {{ option.price }}</span>€
+            </div>
           </div>
           <div class="col-3 d-flex align-items-center justify-content-end">
             <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id" (change)="calculateTotal()">
@@ -30,7 +33,8 @@
     </div>
 
     <div class="col-12">
-      <h4 class="text-end">Preu pressuposat: {{ totalPriceBudget }}€</h4>
+      <h4 class="text-end fw-bold">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{ totalPriceBudget }}</span>€
+      </h4>
     </div>
   </div>
 </div>
