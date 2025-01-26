@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { BudgetService } from '../services/budget.service';
+import { BudgetOption } from '../interfaces/budget-option';
 import { PanelComponent } from '../panel/panel.component';
 @Component({
   selector: 'app-budgets-list',
@@ -13,15 +14,21 @@ import { PanelComponent } from '../panel/panel.component';
   templateUrl: './budgets-list.component.html',
   styleUrl: './budgets-list.component.scss',
 })
-export class BudgetsListComponent {
+export class BudgetsListComponent implements OnInit {
   totalPriceBudget = 0;
 
   formBudget!: FormGroup;
+  programmingOptions: BudgetOption[] = [];
+
   private numberPages = 1;
   private numberLanguages = 1;
 
   constructor(private fb: FormBuilder, private budgetService: BudgetService) {
     this.initializeForm();
+  }
+
+  ngOnInit(): void {
+    this.programmingOptions = this.budgetService.getProgrammingOptions();
   }
 
   private initializeForm(): void {

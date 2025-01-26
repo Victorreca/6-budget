@@ -4,55 +4,29 @@
       <h1 class="text-center">Aconsegueix la millor qualitat</h1>
     </div>
     <div class="col-12">
+      <!-- @for(option of programmingOptions; track option){ -->
       <form class="form" [formGroup]="formBudget">
+        @for(option of programmingOptions; track option){
         <div class="row">
           <div class="col-6 d-flex align-items-center">
             <div>
-              <h3>Seo</h3>
-              <p>Programació d'una web responsive completa</p>
+              <h3>{{option.title}}</h3>
+              <p>{{ option.description }}</p>
             </div>
           </div>
           <div class="col-3 d-flex align-items-center justify-content-center">
-            300€
+            {{ option.price }}
           </div>
           <div class="col-3 d-flex align-items-center justify-content-end">
-            <input type="checkbox" name="" id="seo" formControlName="seo" (change)="calculateTotal()">
-            <label for="seo" class="ps-2">Afegir</label>
+            <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id" (change)="calculateTotal()">
+            <label [for]="option.id" class="ps-2">Afegir</label>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-6 d-flex align-items-center">
-            <div>
-              <h3>Ads</h3>
-              <p>Programació d'una web responsive completa</p>
-            </div>
-          </div>
-          <div class="col-3 d-flex align-items-center justify-content-center">
-            400€
-          </div>
-          <div class="col-3 col-3 d-flex align-items-center justify-content-end">
-            <input type="checkbox" name="" id="ads" formControlName="ads" (change)="calculateTotal()">
-            <label for="ads" class="ps-2">Afegir</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6 d-flex align-items-center">
-            <div>
-              <h3>Web</h3>
-              <p>Programació d'una web responsive completa</p>
-            </div>
-          </div>
-          <div class="col-3 d-flex align-items-center justify-content-center">
-            500€
-          </div>
-          <div class="col-3 col-3 d-flex align-items-center justify-content-end">
-            <input type="checkbox" name="" id="web" formControlName="web" (change)="calculateTotal()">
-            <label for="web" class="ps-2">Afegir</label>
-          </div>
-          @if (formBudget.get('web')?.value) {
+          @if (option.id === 'web' && formBudget.get('web')?.value) {
           <app-panel (updatePagesAndLanguages)="panelUpdate($event)"></app-panel>
           }
         </div>
+        }
+
       </form>
     </div>
 
