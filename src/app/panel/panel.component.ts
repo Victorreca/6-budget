@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BudgetService } from '../services/budget.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-panel',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',
 })

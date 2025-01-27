@@ -1,6 +1,7 @@
 <div class="text-end">
   <span class="d-block mb-3">
-    Nombre de pàgines <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberPages()"><img
+    Nombre de pàgines <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberPages()"
+      [disabled]="numberPages <= 1" [ngClass]="{'opacity-25 not-allowed': numberPages <= 1}"><img
         src="assets/signo-menos.png" width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
       {{numberPages}}
@@ -9,7 +10,8 @@
         width="20"></button>
   </span>
   <span class="d-block">
-    Nombre d'idiomes <button type="button" class="border-0 bg-transparent" (click)="descreaseNumberLanguages()"><img
+    Nombre d'idiomes <button type="button" class="border-0 bg-transparent" (click)="descreaseNumberLanguages()"
+      [disabled]="numberLlanguages <= 1" [ngClass]="{'opacity-25 not-allowed': numberLlanguages <= 1}"><img
         src="assets/signo-menos.png" width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
       {{numberLlanguages}}
