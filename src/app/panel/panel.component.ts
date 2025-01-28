@@ -43,7 +43,7 @@ export class PanelComponent implements OnInit {
     this.budgetService.updateLanguages(this.numberLlanguages);
     this.emitUpdatePagesLanguages();
   }
-  descreaseNumberLanguages() {
+  decreaseNumberLanguages() {
     if (this.numberLlanguages > 1) {
       this.numberLlanguages--;
       this.budgetService.updatePages(this.numberLlanguages);
