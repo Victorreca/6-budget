@@ -1,0 +1,40 @@
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-12 pb-5">
+      <h1 class="text-center">Aconsegueix la millor qualitat</h1>
+    </div>
+    <div class="col-12">
+      <form class="form d-flex flex-column gap-3" [formGroup]="formBudget">
+        @for(option of programmingOptions; track option.id; let lastItem = $last){
+        <div class="row p-3" [ngClass]="{'border-checked shadow': formBudget.get(option.id)?.value, 'mb-5': lastItem}">
+          <div class="col-6 d-flex align-items-center">
+            <div>
+              <h3>{{option.title}}</h3>
+              <p>{{ option.description }}</p>
+            </div>
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-center">
+            <div>
+              <span class="fw-prices me-1">
+                {{ option.price }}</span>€
+            </div>
+          </div>
+          <div class="col-3 d-flex align-items-center justify-content-end">
+            <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id" (change)="calculateTotal()">
+            <label [for]="option.id" class="ps-2">Afegir</label>
+          </div>
+          @if (option.id === 'web' && formBudget.get('web')?.value) {
+          <app-panel (updatePagesAndLanguages)="panelUpdate($event)"></app-panel>
+          }
+        </div>
+        }
+
+      </form>
+    </div>
+
+    <div class="col-12">
+      <h4 class="text-end fw-bold">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{ totalPriceBudget }}</span>€
+      </h4>
+    </div>
+  </div>
+</div>
