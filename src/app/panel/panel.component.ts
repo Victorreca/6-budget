@@ -1,10 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BudgetService } from '../services/budget.service';
 import { CommonModule } from '@angular/common';
+import { PopupComponent } from '../shared/popup/popup.component';
 
 @Component({
   selector: 'app-panel',
-  imports: [CommonModule],
+  imports: [CommonModule, PopupComponent],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',
 })

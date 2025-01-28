@@ -1,8 +1,13 @@
 <div class="text-end">
-  <span class="d-block mb-3">
-    Nombre de pàgines <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberPages()"
-      [disabled]="numberPages <= 1" [ngClass]="{'opacity-25 not-allowed': numberPages <= 1}"><img
-        src="assets/signo-menos.png" width="20"></button>
+  <span class="d-block mb-3 position-relative">
+    <button type="button" class="info-btn border-0 bg-transparent" (click)="popup.openPopup('pages')">
+      <img src="assets/info-icon.png" alt="Informació de pàgines" width="20">
+    </button>
+    Número de pàgines
+    <app-popup #popup></app-popup>
+
+    <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberPages()" [disabled]="numberPages <= 1"
+      [ngClass]="{'opacity-25 not-allowed': numberPages <= 1}"><img src="assets/signo-menos.png" width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
       {{numberPages}}
     </span>
@@ -10,7 +15,10 @@
         width="20"></button>
   </span>
   <span class="d-block">
-    Nombre d'idiomes <button type="button" class="border-0 bg-transparent" (click)="descreaseNumberLanguages()"
+    <button type="button" class="info-btn border-0 bg-transparent" (click)="popup.openPopup('languages')">
+      <img src="assets/info-icon.png" alt="Informació de pàgines" width="20">
+    </button>
+    Número d'idiomes <button type="button" class="border-0 bg-transparent" (click)="descreaseNumberLanguages()"
       [disabled]="numberLlanguages <= 1" [ngClass]="{'opacity-25 not-allowed': numberLlanguages <= 1}"><img
         src="assets/signo-menos.png" width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
