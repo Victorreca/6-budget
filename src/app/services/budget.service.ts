@@ -43,6 +43,8 @@ export class BudgetService {
         email: 'joan@example.com',
         services: ['Web', 'Seo'],
         totalPrice: 830,
+        pages: 1,
+        languages: 2,
       },
       {
         name: 'Maria García',
@@ -100,5 +102,9 @@ export class BudgetService {
 
   addBudget(budget: CurrentBudget) {
     this.budgetSignal.update((prev) => [...prev, budget]);
+  }
+
+  existsBudgetByEmail(emailExist: string): boolean {
+    return this.budgetSignal().some((budget) => budget.email === emailExist);
   }
 }

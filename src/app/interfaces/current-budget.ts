@@ -4,4 +4,6 @@ export interface CurrentBudget {
   email: string;
   services: string[];
   totalPrice: number;
+  pages?: number | null;
+  languages?: number | null;
 }

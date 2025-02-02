@@ -15,17 +15,13 @@
     <h4>Serveis contractats</h4>
     <ul>
       @for(service of budget.services; track $index){
-      <li>{{service}}</li>
+      <li>{{service}} @if(service === 'Web' && budget.pages && budget.languages) {
+        <span> (Pàgines: {{budget.pages}}, Llengües: {{budget.languages}})</span>
+        }
+      </li>
       }
     </ul>
     <h4 class="fw-bold">Preu total: {{budget.totalPrice}}</h4>
-
-    @if(budget.pages && budget.languages){
-    <div>
-      <p><strong>Pàgines seleccionades:</strong> {{budget.pages}}</p>
-      <p><strong>Llengües seleccionades:</strong> {{budget.languages}}</p>
-    </div>
-    }
   </div>
 </div>
 }}

@@ -76,6 +76,13 @@ export class HomeComponent implements OnInit {
       return;
     }
 
+    const email = this.formBudget.get('email')?.value;
+
+    if (this.budgetService.existsBudgetByEmail(email)) {
+      alert('Aquest email ja està registrat. Introdueix un email diferent.');
+      return;
+    }
+
     const selectedServices = this.programmingOptions
       .filter((option) => this.formBudget.get(option.id)?.value)
       .map((option) => option.title);
@@ -86,6 +93,10 @@ export class HomeComponent implements OnInit {
       email: this.formBudget.get('email')?.value,
       services: selectedServices,
       totalPrice: this.totalPriceBudget,
+      pages: this.formBudget.get('web')?.value ? this.numberPages : null,
+      languages: this.formBudget.get('web')?.value
+        ? this.numberLanguages
+        : null,
     };
     this.budgetService.addBudget(budgetNew);
   }
