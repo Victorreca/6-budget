@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BudgetOption } from '../interfaces/budget-option';
+import { CurrentBudget } from '../interfaces/current-budget';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetService {
+  private budgetSignal = signal<CurrentBudget[]>([]);
+
   private programmingOptions: BudgetOption[] = [
     {
       id: 'seo',
@@ -32,6 +35,25 @@ export class BudgetService {
 
   totalPrice = 0;
 
+  constructor() {
+    this.budgetSignal.set([
+      {
+        name: 'Joan Pérez',
+        phone: 654321987,
+        email: 'joan@example.com',
+        services: ['Web', 'Seo'],
+        totalPrice: 830,
+      },
+      {
+        name: 'Maria García',
+        phone: 612345678,
+        email: 'maria@example.com',
+        services: ['Ads'],
+        totalPrice: 400,
+      },
+    ]);
+  }
+
   getProgrammingOptions(): BudgetOption[] {
     return this.programmingOptions;
   }
@@ -52,7 +74,6 @@ export class BudgetService {
     return this.numberPages;
   }
 
-  constructor() {}
   calculateTotalPrice(formValue: any): number {
     const webOptionPrice = this.programmingOptions.find(
       (option) => option.id === 'web'
@@ -71,5 +92,13 @@ export class BudgetService {
           this.numberLanguages * this.pageCost
         : 0);
     return this.totalPrice;
+  }
+
+  getBudgets() {
+    return this.budgetSignal;
+  }
+
+  addBudget(budget: CurrentBudget) {
+    this.budgetSignal.update((prev) => [...prev, budget]);
   }
 }

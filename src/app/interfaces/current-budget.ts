@@ -2,6 +2,6 @@ export interface CurrentBudget {
   name: string;
   phone: number;
   email: string;
-  services: [];
+  services: string[];
   totalPrice: number;
 }

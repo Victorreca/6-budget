@@ -1,0 +1,31 @@
+@if(budgets()){
+<h2>Pressupostos en curs</h2>
+@for(budget of budgets(); track budget.email){
+<div class="row border p-4 rounded-4 shadow mt-4">
+  <div class="col-12">
+    <p>
+      <strong>Nom:</strong> {{budget.name}}
+    </p>
+    <p>
+      <strong>Telèfon:</strong> {{budget.phone}}
+    </p>
+    <p>
+      <strong>E-mail:</strong> {{budget.email}}
+    </p>
+    <h4>Serveis contractats</h4>
+    <ul>
+      @for(service of budget.services; track $index){
+      <li>{{service}}</li>
+      }
+    </ul>
+    <h4 class="fw-bold">Preu total: {{budget.totalPrice}}</h4>
+
+    @if(budget.pages && budget.languages){
+    <div>
+      <p><strong>Pàgines seleccionades:</strong> {{budget.pages}}</p>
+      <p><strong>Llengües seleccionades:</strong> {{budget.languages}}</p>
+    </div>
+    }
+  </div>
+</div>
+}}
