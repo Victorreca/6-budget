@@ -4,6 +4,7 @@
   <div class="col-12">
     <app-sort-by-price (sortByPrice)="updateSortByPrice($event)"></app-sort-by-price>
     <app-sort-alphabetically (sortAlphabetically)="updateSortByName($event)" class="px-4"></app-sort-alphabetically>
+    <app-sort-by-date (sortByDate)="updateSortByDate($event)"></app-sort-by-date>
   </div>
 </div>
 @for(budget of budgets(); track budget.email){

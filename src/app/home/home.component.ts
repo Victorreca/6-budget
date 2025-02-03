@@ -97,6 +97,7 @@ export class HomeComponent implements OnInit {
       languages: this.formBudget.get('web')?.value
         ? this.numberLanguages
         : null,
+      date: new Date(),
     };
     this.budgetService.addBudget(budgetNew);
   }
