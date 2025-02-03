@@ -45,6 +45,7 @@ export class BudgetService {
         totalPrice: 830,
         pages: 1,
         languages: 2,
+        date: new Date('2024-05-15'),
       },
       {
         name: 'Maria García',
@@ -52,6 +53,7 @@ export class BudgetService {
         email: 'maria@example.com',
         services: ['Ads'],
         totalPrice: 400,
+        date: new Date('2024-03-22'),
       },
     ]);
   }

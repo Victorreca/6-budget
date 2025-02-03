@@ -6,4 +6,5 @@ export interface CurrentBudget {
   totalPrice: number;
   pages?: number | null;
   languages?: number | null;
+  date: Date;
 }
