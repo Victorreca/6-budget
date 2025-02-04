@@ -2,6 +2,7 @@
 <h2>Pressupostos en curs</h2>
 <div class="row">
   <div class="col-12">
+    <app-filter-search (searchTerm)="updateSearchTerm($event)"></app-filter-search>
     <app-sort-by-price (sortByPrice)="updateSortByPrice($event)"></app-sort-by-price>
     <app-sort-alphabetically (sortAlphabetically)="updateSortByName($event)" class="px-4"></app-sort-alphabetically>
     <app-sort-by-date (sortByDate)="updateSortByDate($event)"></app-sort-by-date>
