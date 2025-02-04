@@ -1,0 +1,8 @@
+<div class="d-flex gap-2">
+  <input type="text" class="form-control" placeholder="Cerca per nom..." [(ngModel)]="searchValue"
+    (keyup.enter)="applyFilter()">
+
+  <button class="btn btn-primary" (click)="applyFilter()">
+    Filtrar
+  </button>
+</div>

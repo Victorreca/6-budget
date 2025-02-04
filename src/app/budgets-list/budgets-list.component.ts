@@ -4,12 +4,14 @@ import { BudgetService } from '../services/budget.service';
 import { SortByPriceComponent } from '../sort-buttons/sort-by-price/sort-by-price.component';
 import { SortAlphabeticallyComponent } from '../sort-buttons/sort-alphabetically/sort-alphabetically.component';
 import { SortByDateComponent } from '../sort-buttons/sort-by-date/sort-by-date.component';
+import { FilterSearchComponent } from '../filter-search/filter-search.component';
 @Component({
   selector: 'app-budgets-list',
   imports: [
     SortByPriceComponent,
     SortAlphabeticallyComponent,
     SortByDateComponent,
+    FilterSearchComponent,
   ],
   templateUrl: './budgets-list.component.html',
   styleUrl: './budgets-list.component.scss',
@@ -19,6 +21,7 @@ export class BudgetsListComponent {
   private sortByPriceAscending = signal<boolean | null>(null);
   private sortByNameAscending = signal<boolean | null>(null);
   private sortByDateAscending = signal<boolean | null>(null);
+  private searchTerm = signal<string>('');
 
   budgets: Signal<CurrentBudget[]>;
 
@@ -27,6 +30,12 @@ export class BudgetsListComponent {
 
     this.budgets = computed(() => {
       let sortedBudgets = [...this.budgetsOriginal()];
+
+      if (this.searchTerm()) {
+        sortedBudgets = sortedBudgets.filter((budget) =>
+          budget.name.toLowerCase().includes(this.searchTerm().toLowerCase())
+        );
+      }
 
       if (this.sortByNameAscending() !== null) {
         sortedBudgets.sort((a, b) =>
@@ -68,5 +77,9 @@ export class BudgetsListComponent {
     this.sortByDateAscending.set(isAscending);
     this.sortByPriceAscending.set(null);
     this.sortByNameAscending.set(null);
+  }
+
+  updateSearchTerm(term: string) {
+    this.searchTerm.set(term);
   }
 }
