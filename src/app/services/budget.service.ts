@@ -6,7 +6,7 @@ import { CurrentBudget } from '../interfaces/current-budget';
   providedIn: 'root',
 })
 export class BudgetService {
-  private budgetSignal = signal<CurrentBudget[]>([]);
+  budgetSignal = signal<CurrentBudget[]>([]);
 
   private programmingOptions: BudgetOption[] = [
     {
@@ -70,14 +70,6 @@ export class BudgetService {
     this.numberLanguages = languages;
   }
 
-  getNumberLanguages(): number {
-    return this.numberLanguages;
-  }
-
-  getNumberPages(): number {
-    return this.numberPages;
-  }
-
   calculateTotalPrice(formValue: any): number {
     const webOptionPrice = this.programmingOptions.find(
       (option) => option.id === 'web'
@@ -104,9 +96,5 @@ export class BudgetService {
 
   addBudget(budget: CurrentBudget) {
     this.budgetSignal.update((prev) => [...prev, budget]);
-  }
-
-  existsBudgetByEmail(emailExist: string): boolean {
-    return this.budgetSignal().some((budget) => budget.email === emailExist);
   }
 }

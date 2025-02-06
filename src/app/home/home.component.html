@@ -4,9 +4,10 @@
       <h1 class="text-center">Aconsegueix la millor qualitat</h1>
     </div>
     <div class="col-12">
-      <form class="form d-flex flex-column gap-3" [formGroup]="formBudget">
-        @for(option of programmingOptions; track option.id; let lastItem = $last){
-        <div class="row p-3" [ngClass]="{'border-checked shadow': formBudget.get(option.id)?.value, 'mb-5': lastItem}">
+      <form class="form d-flex flex-column gap-3" [formGroup]="budgetFormService.formBudget">
+        @for(option of budgetService.getProgrammingOptions(); track option.id; let lastItem = $last){
+        <div class="row p-3"
+          [ngClass]="{'border-checked shadow': budgetFormService.formBudget.get(option.id)?.value, 'mb-5': lastItem}">
           <div class="col-6 d-flex align-items-center">
             <div>
               <h3>{{option.title}}</h3>
@@ -20,10 +21,11 @@
             </div>
           </div>
           <div class="col-3 d-flex align-items-center justify-content-end">
-            <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id" (change)="calculateTotal()">
+            <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id"
+              (change)="budgetFormService.calculateTotal()">
             <label [for]="option.id" class="ps-2">Afegir</label>
           </div>
-          @if (option.id === 'web' && formBudget.get('web')?.value) {
+          @if (option.id === 'web' && budgetFormService.formBudget.get('web')?.value) {
           <app-panel (updatePagesAndLanguages)="panelUpdate($event)"></app-panel>
           }
         </div>
@@ -33,16 +35,18 @@
     </div>
 
     <div class="col-12">
-      <h4 class="text-end fw-bold">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{ totalPriceBudget }}</span>€
+      <h4 class="text-end fw-bold">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{
+          budgetFormService.totalPriceBudget }}</span>€
       </h4>
     </div>
   </div>
 
-  @if(formBudget.get('web')?.value || formBudget.get('seo')?.value || formBudget.get('ads')?.value){
+  @if(budgetFormService.formBudget.get('web')?.value || budgetFormService.formBudget.get('seo')?.value ||
+  budgetFormService.formBudget.get('ads')?.value){
   <div class="row mt-4">
     <div class="col-12">
 
-      <form [formGroup]="formBudget" (ngSubmit)="submitBudget($event)"
+      <form [formGroup]="budgetFormService.formBudget" (ngSubmit)="submitBudget($event)"
         class="form d-flex flex-column gap-3 rounded-4 border shadow p-4">
         <h2>
           Demanar pressupost
@@ -50,23 +54,32 @@
         <div class="row">
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Nom" aria-label="name" formControlName="name">
-            <div *ngIf="formBudget.get('name')?.invalid && formBudget.get('name')?.touched" class="error">
+            <div
+              *ngIf="budgetFormService.formBudget.get('name')?.invalid && budgetFormService.formBudget.get('name')?.touched"
+              class="error">
               Nom és obligatori.
             </div>
           </div>
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Telèfon" aria-label="phone" formControlName="phone">
-            <div *ngIf="formBudget.get('phone')?.invalid && formBudget.get('phone')?.touched" class="error">
-              <span *ngIf="formBudget.get('phone')?.errors?.['required']">Teléfono és obligatori.</span>
-              <span *ngIf="formBudget.get('phone')?.errors?.['pattern']">Ha de ser telèfon vàlid d'almenys 9
+            <div
+              *ngIf="budgetFormService.formBudget.get('phone')?.invalid && budgetFormService.formBudget.get('phone')?.touched"
+              class="error">
+              <span *ngIf="budgetFormService.formBudget.get('phone')?.errors?.['required']">Teléfono és
+                obligatori.</span>
+              <span *ngIf="budgetFormService.formBudget.get('phone')?.errors?.['pattern']">Ha de ser telèfon vàlid
+                d'almenys 9
                 dígits.</span>
             </div>
           </div>
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Email" aria-label="email" formControlName="email">
-            <div *ngIf="formBudget.get('email')?.invalid && formBudget.get('email')?.touched" class="error">
-              <span *ngIf="formBudget.get('email')?.errors?.['required']">Correo es obligatorio.</span>
-              <span *ngIf="formBudget.get('email')?.errors?.['email']">Email no vàlid.</span>
+            <div
+              *ngIf="budgetFormService.formBudget.get('email')?.invalid && budgetFormService.formBudget.get('email')?.touched"
+              class="error">
+              <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['required']">Correo es
+                obligatorio.</span>
+              <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['email']">Email no vàlid.</span>
             </div>
           </div>
           <div class="col-12 col-md">
