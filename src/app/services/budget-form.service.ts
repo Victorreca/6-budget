@@ -85,9 +85,6 @@ export class BudgetFormService {
       languages,
     });
 
-    this.budgetService.updatePages(pages);
-    this.budgetService.updateLanguages(languages);
-
     this.calculateTotal();
   }
   calculateTotal() {

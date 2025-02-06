@@ -57,7 +57,7 @@ export class PanelComponent implements OnInit {
       languages: this.numberLanguages,
     });
 
-    this.budgetFormService.calculateTotal(); // ✅ Recalcula el total al actualizar los valores
+    this.budgetFormService.calculateTotal();
 
     this.updatePagesAndLanguages.emit({
       pages: this.numberPages,
