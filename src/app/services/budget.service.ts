@@ -6,7 +6,7 @@ import { CurrentBudget } from '../interfaces/current-budget';
   providedIn: 'root',
 })
 export class BudgetService {
-  private budgetSignal = signal<CurrentBudget[]>([]);
+  budgetSignal = signal<CurrentBudget[]>([]);
 
   private programmingOptions: BudgetOption[] = [
     {
@@ -30,10 +30,6 @@ export class BudgetService {
   ];
 
   private pageCost = 30;
-  private numberPages = 1;
-  private numberLanguages = 1;
-
-  totalPrice = 0;
 
   constructor() {
     this.budgetSignal.set([
@@ -62,28 +58,12 @@ export class BudgetService {
     return this.programmingOptions;
   }
 
-  updatePages(pages: number) {
-    this.numberPages = pages;
-  }
-
-  updateLanguages(languages: number) {
-    this.numberLanguages = languages;
-  }
-
-  getNumberLanguages(): number {
-    return this.numberLanguages;
-  }
-
-  getNumberPages(): number {
-    return this.numberPages;
-  }
-
   calculateTotalPrice(formValue: any): number {
-    const webOptionPrice = this.programmingOptions.find(
+    const webOption = this.programmingOptions.find(
       (option) => option.id === 'web'
-    )!.price;
+    )!;
 
-    this.totalPrice =
+    return (
       (formValue.value.seo
         ? this.programmingOptions.find((option) => option.id === 'seo')!.price
         : 0) +
@@ -91,11 +71,11 @@ export class BudgetService {
         ? this.programmingOptions.find((option) => option.id === 'ads')!.price
         : 0) +
       (formValue.value.web
-        ? webOptionPrice +
-          this.numberPages * this.pageCost +
-          this.numberLanguages * this.pageCost
-        : 0);
-    return this.totalPrice;
+        ? webOption.price +
+          formValue.value.pages * this.pageCost +
+          formValue.value.languages * this.pageCost
+        : 0)
+    );
   }
 
   getBudgets() {
@@ -104,9 +84,5 @@ export class BudgetService {
 
   addBudget(budget: CurrentBudget) {
     this.budgetSignal.update((prev) => [...prev, budget]);
-  }
-
-  existsBudgetByEmail(emailExist: string): boolean {
-    return this.budgetSignal().some((budget) => budget.email === emailExist);
   }
 }

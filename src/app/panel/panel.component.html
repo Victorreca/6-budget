@@ -19,10 +19,10 @@
       <img src="assets/info-icon.png" alt="Informació de pàgines" width="20">
     </button>
     Número d'idiomes <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberLanguages()"
-      [disabled]="numberLlanguages <= 1" [ngClass]="{'opacity-25 not-allowed': numberLlanguages <= 1}"><img
+      [disabled]="numberLanguages <= 1" [ngClass]="{'opacity-25 not-allowed': numberLanguages <= 1}"><img
         src="assets/signo-menos.png" width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
-      {{numberLlanguages}}
+      {{numberLanguages}}
     </span>
     <button type=" button" class="border-0 bg-transparent" (click)="increaseNumberLanguages()"><img src="assets/mas.png"
         width="20"></button>

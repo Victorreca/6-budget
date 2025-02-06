@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { BudgetService } from '../services/budget.service';
 import { CommonModule } from '@angular/common';
 import { PopupComponent } from '../shared/popup/popup.component';
+import { BudgetFormService } from '../services/budget-form.service';
 
 @Component({
   selector: 'app-panel',
@@ -11,50 +11,57 @@ import { PopupComponent } from '../shared/popup/popup.component';
 })
 export class PanelComponent implements OnInit {
   numberPages: number = 1;
-  numberLlanguages: number = 1;
-
-  ngOnInit(): void {
-    this.numberPages = this.budgetService.getNumberPages();
-    this.numberLlanguages = this.budgetService.getNumberLanguages();
-  }
+  numberLanguages: number = 1;
 
   @Output() updatePagesAndLanguages = new EventEmitter<{
     pages: number;
     languages: number;
   }>();
 
-  constructor(private budgetService: BudgetService) {}
+  constructor(private budgetFormService: BudgetFormService) {}
+
+  ngOnInit(): void {
+    this.numberPages =
+      this.budgetFormService.formBudget.get('pages')?.value || 1;
+    this.numberLanguages =
+      this.budgetFormService.formBudget.get('languages')?.value || 1;
+  }
 
   increaseNumberPages() {
     this.numberPages++;
-    this.budgetService.updatePages(this.numberPages);
-    this.emitUpdatePagesLanguages();
+    this.updateFormValues();
   }
+
   decreaseNumberPages() {
     if (this.numberPages > 1) {
       this.numberPages--;
-      this.budgetService.updatePages(this.numberPages);
-      this.emitUpdatePagesLanguages();
+      this.updateFormValues();
     }
   }
 
   increaseNumberLanguages() {
-    this.numberLlanguages++;
-    this.budgetService.updateLanguages(this.numberLlanguages);
-    this.emitUpdatePagesLanguages();
+    this.numberLanguages++;
+    this.updateFormValues();
   }
+
   decreaseNumberLanguages() {
-    if (this.numberLlanguages > 1) {
-      this.numberLlanguages--;
-      this.budgetService.updatePages(this.numberLlanguages);
-      this.emitUpdatePagesLanguages();
+    if (this.numberLanguages > 1) {
+      this.numberLanguages--;
+      this.updateFormValues();
     }
   }
 
-  private emitUpdatePagesLanguages() {
+  private updateFormValues() {
+    this.budgetFormService.formBudget.patchValue({
+      pages: this.numberPages,
+      languages: this.numberLanguages,
+    });
+
+    this.budgetFormService.calculateTotal();
+
     this.updatePagesAndLanguages.emit({
       pages: this.numberPages,
-      languages: this.numberLlanguages,
+      languages: this.numberLanguages,
     });
   }
 }
