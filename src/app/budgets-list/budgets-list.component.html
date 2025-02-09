@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-10 offset-1">
-      <h2 class="mb-5">Pressupostos en curs</h2>
+      <h2 class="mb-5">Pressupostos en curs:</h2>
       <div class="row">
         <div class="col-12 d-flex justify-content-end">
           <app-filter-search (searchTerm)="updateSearchTerm($event)"></app-filter-search>
@@ -26,25 +26,35 @@
   @for(budget of budgets(); track budget.email){
   <div class="row mt-5 mt-4">
     <div class="col-10 offset-1 border p-4 rounded-4 shadow">
-      <p>
-        <strong>Nom:</strong> {{budget.name}}
-      </p>
-      <p>
-        <strong>Telèfon:</strong> {{budget.phone}}
-      </p>
-      <p>
-        <strong>E-mail:</strong> {{budget.email}}
-      </p>
-      <h4>Serveis contractats</h4>
-      <ul>
-        @for(service of budget.services; track $index){
-        <li>{{service}} @if(service === 'Web' && budget.pages && budget.languages) {
-          <span> (Pàgines: {{budget.pages}}, Llengües: {{budget.languages}})</span>
-          }
-        </li>
-        }
-      </ul>
-      <h4 class="fw-bold">Preu total: {{budget.totalPrice}}</h4>
+      <div class="row align-items-center">
+        <div class="col">
+          <h4 class="fw-bold">
+            {{budget.name}}
+          </h4>
+          <span class="text-secondary d-block">
+            {{budget.email}}
+            <br>
+            {{budget.phone}}
+          </span>
+        </div>
+        <div class="col">
+          <p class="fw-bold">Serveis contractats</p>
+          <ul class="mb-0">
+            @for(service of budget.services; track $index){
+            <li>{{service}} @if(service === 'Web' && budget.pages && budget.languages) {
+              <span> (Pàgines: {{budget.pages}}, Llengües: {{budget.languages}})</span>
+              }
+            </li>
+            }
+          </ul>
+        </div>
+        <div class="col text-center">
+          <h6 class="fw-bold text-secondary">Total:</h6>
+          <h3 class="fw-bold">
+            {{budget.totalPrice}}<span class="h6">€</span>
+          </h3>
+        </div>
+      </div>
     </div>
   </div>
   }
