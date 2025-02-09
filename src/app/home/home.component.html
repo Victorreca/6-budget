@@ -1,5 +1,5 @@
 <div class="container pt-5 budget-header">
-  <div class="row">
+  <div class="row pb-4">
     <div class="col-12 py-5 budget-header__background">
       <h1 class="budget-header__title">Aconsegueix la millor qualitat</h1>
     </div>
@@ -7,20 +7,20 @@
       <form class="form d-flex flex-column gap-4 pt-5" [formGroup]="budgetFormService.formBudget">
         @for(option of budgetService.getProgrammingOptions(); track option.id; let lastItem = $last){
         <div class="row p-3"
-          [ngClass]="{'border-checked shadow': budgetFormService.formBudget.get(option.id)?.value, 'mb-5': lastItem}">
+          [ngClass]="{'border-checked shadow': budgetFormService.formBudget.get(option.id)?.value, 'mb-3': lastItem, 'rounded-4 shadow': !budgetFormService.formBudget.get(option.id)?.value}">
           <div class="col-6 d-flex align-items-center">
             <div>
               <h3>{{option.title}}</h3>
               <p>{{ option.description }}</p>
             </div>
           </div>
-          <div class="col-3 d-flex align-items-center justify-content-center">
+          <div class="col-6 col-md-3 d-flex align-items-center justify-content-center">
             <div>
               <span class="fw-prices me-1">
                 {{ option.price }}</span>€
             </div>
           </div>
-          <div class="col-3 d-flex align-items-center justify-content-end">
+          <div class="col-12 col-md-3 d-flex align-items-center justify-content-end">
             <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id"
               (change)="budgetFormService.calculateTotal()">
             <label [for]="option.id" class="ps-2">Afegir</label>
@@ -33,7 +33,7 @@
 
       </form>
 
-      <h4 class="text-end fw-bold">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{
+      <h4 class="text-end fw-bold mt-4">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{
           budgetFormService.totalPriceBudget }}</span>€
       </h4>
     </div>
@@ -49,7 +49,7 @@
         <h2>
           Demanar pressupost
         </h2>
-        <div class="row">
+        <div class="row align-items-center gap-3 gap-md-0">
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Nom" aria-label="name" formControlName="name">
             <div
@@ -80,8 +80,8 @@
               <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['email']">Email no vàlid.</span>
             </div>
           </div>
-          <div class="col-12 col-md">
-            <button type="submit" class="btn btn-primary mb-3">
+          <div class="col-12 col-md text-end pt-3 pt-md-0">
+            <button type="submit" class="btn btn-primary py-3 py-md-2">
               Sol·licitar pressupost <img src="assets/icons/request-quote.png" alt="sol·licitar pressupost" width="">
             </button>
           </div>
