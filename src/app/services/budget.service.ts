@@ -49,7 +49,7 @@ export class BudgetService {
         email: 'maria@example.com',
         services: ['Ads'],
         totalPrice: 400,
-        date: new Date('2024-03-22'),
+        date: new Date('2024-08-22'),
       },
     ]);
   }

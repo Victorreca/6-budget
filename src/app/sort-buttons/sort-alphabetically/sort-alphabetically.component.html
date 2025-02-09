@@ -1,3 +1,6 @@
 <button class="btn btn-primary" (click)="toggleSortAlphbetically()">
-  Ordenar alfabèticament {{ isAscending ? '▲' : '▼' }}
+  Nom <span *ngIf="isActive">
+    <i *ngIf="isAscending" class="bi bi-caret-up-fill"></i>
+    <i *ngIf="!isAscending" class="bi bi-caret-down-fill"></i>
+  </span>
 </button>

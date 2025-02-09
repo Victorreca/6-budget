@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sort-by-price',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './sort-by-price.component.html',
   styleUrl: './sort-by-price.component.scss',
 })
 export class SortByPriceComponent {
   @Output() sortByPrice = new EventEmitter<boolean>();
+  @Input() isActive: boolean = false;
 
   isAscending = true;
 

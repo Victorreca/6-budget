@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sort-by-date',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './sort-by-date.component.html',
   styleUrl: './sort-by-date.component.scss',
 })
 export class SortByDateComponent {
   @Output() sortByDate = new EventEmitter<boolean>();
+  @Input() isActive: boolean = false;
 
-  isAscending = true;
+  isAscending = false;
 
   toggleSortByDate() {
     this.isAscending = !this.isAscending;
