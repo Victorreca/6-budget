@@ -55,22 +55,33 @@ export class BudgetService {
   }
 
   calculateTotalPrice(formValue: any): number {
-    const webOption = this.programmingOptions.find(
+    const webPrice = this.programmingOptions.find(
       (option) => option.id === 'web'
-    )!;
+    )!.price;
+    const seoPrice = this.programmingOptions.find(
+      (option) => option.id === 'seo'
+    )!.price;
+    const adsPrice = this.programmingOptions.find(
+      (option) => option.id === 'ads'
+    )!.price;
+
+    const selectedWebPrice = formValue.value.web ? webPrice : 0;
+    const selectedSeoPrice = formValue.value.seo ? seoPrice : 0;
+    const selectedAdsPrice = formValue.value.ads ? adsPrice : 0;
+
+    const extraPages = formValue.value.pages - 1;
+    const extraLanguages = formValue.value.languages - 1;
+
+    const extraPagesCost = extraPages * this.pageCost;
+    const extraLanguagesCost =
+      (1 + extraPages) * extraLanguages * this.pageCost;
 
     return (
-      (formValue.value.seo
-        ? this.programmingOptions.find((option) => option.id === 'seo')!.price
-        : 0) +
-      (formValue.value.ads
-        ? this.programmingOptions.find((option) => option.id === 'ads')!.price
-        : 0) +
-      (formValue.value.web
-        ? webOption.price +
-          formValue.value.pages * this.pageCost +
-          formValue.value.languages * this.pageCost
-        : 0)
+      selectedSeoPrice +
+      selectedAdsPrice +
+      selectedWebPrice +
+      extraPagesCost +
+      extraLanguagesCost
     );
   }
 
