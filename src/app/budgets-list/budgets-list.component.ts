@@ -22,46 +22,43 @@ export class BudgetsListComponent {
   private sortByNameAscending = signal<boolean | null>(null);
   private sortByDateAscending = signal<boolean | null>(false);
   private searchTerm = signal<string>('');
-
   private activeSort = signal<string>('date');
-
-  budgets: Signal<CurrentBudget[]>;
 
   constructor(private budgetService: BudgetService) {
     this.budgetsOriginal = this.budgetService.getBudgets();
-
-    this.budgets = computed(() => {
-      let sortedBudgets = [...this.budgetsOriginal()];
-
-      if (this.searchTerm()) {
-        sortedBudgets = sortedBudgets.filter((budget) =>
-          budget.name.toLowerCase().includes(this.searchTerm().toLowerCase())
-        );
-      }
-
-      if (this.activeSort() === 'name') {
-        sortedBudgets.sort((a, b) =>
-          this.sortByNameAscending()
-            ? a.name.localeCompare(b.name)
-            : b.name.localeCompare(a.name)
-        );
-      } else if (this.activeSort() === 'price') {
-        sortedBudgets.sort((a, b) =>
-          this.sortByPriceAscending()
-            ? a.totalPrice - b.totalPrice
-            : b.totalPrice - a.totalPrice
-        );
-      } else if (this.activeSort() === 'date') {
-        sortedBudgets.sort((a, b) =>
-          this.sortByDateAscending()
-            ? new Date(a.date).getTime() - new Date(b.date).getTime()
-            : new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
-      }
-
-      return sortedBudgets;
-    });
   }
+
+  budgets: Signal<CurrentBudget[]> = computed(() => {
+    let sortedBudgets = [...this.budgetsOriginal()];
+
+    if (this.searchTerm()) {
+      sortedBudgets = sortedBudgets.filter((budget) =>
+        budget.name.toLowerCase().includes(this.searchTerm().toLowerCase())
+      );
+    }
+
+    if (this.activeSort() === 'name') {
+      sortedBudgets.sort((a, b) =>
+        this.sortByNameAscending()
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name)
+      );
+    } else if (this.activeSort() === 'price') {
+      sortedBudgets.sort((a, b) =>
+        this.sortByPriceAscending()
+          ? a.totalPrice - b.totalPrice
+          : b.totalPrice - a.totalPrice
+      );
+    } else if (this.activeSort() === 'date') {
+      sortedBudgets.sort((a, b) =>
+        this.sortByDateAscending()
+          ? new Date(a.date).getTime() - new Date(b.date).getTime()
+          : new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+    }
+
+    return sortedBudgets;
+  });
 
   updateSortByPrice(isAscending: boolean) {
     this.sortByPriceAscending.set(isAscending);
