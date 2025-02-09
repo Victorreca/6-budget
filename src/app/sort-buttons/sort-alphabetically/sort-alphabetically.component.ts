@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sort-alphabetically',
@@ -8,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SortAlphabeticallyComponent {
   @Output() sortAlphabetically = new EventEmitter<boolean>();
+  @Input() isActive: boolean = false;
 
   isAscending = true;
 

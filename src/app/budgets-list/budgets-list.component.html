@@ -1,35 +1,70 @@
 @if(budgets()){
-<h2>Pressupostos en curs</h2>
+
 <div class="row">
-  <div class="col-12">
-    <app-filter-search (searchTerm)="updateSearchTerm($event)"></app-filter-search>
-    <app-sort-by-price (sortByPrice)="updateSortByPrice($event)"></app-sort-by-price>
-    <app-sort-alphabetically (sortAlphabetically)="updateSortByName($event)" class="px-4"></app-sort-alphabetically>
-    <app-sort-by-date (sortByDate)="updateSortByDate($event)"></app-sort-by-date>
+  <div class="col-10 offset-1">
+    <hr class="my-5 border-dashed">
+
   </div>
 </div>
+<div class="row">
+  <div class="col-10 offset-1">
+    <h2 class="mb-5">Pressupostos en curs:</h2>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-end">
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <app-filter-search (searchTerm)="updateSearchTerm($event)"></app-filter-search>
+
+          </div>
+          <div class="col-12 col-md-7 text-center text-md-end">
+            <span class="d-block d-md-none pb-2">Ordenar per: </span>
+            <app-sort-by-date (sortByDate)="updateSortByDate($event)"
+              [isActive]="isSortActive('date')"></app-sort-by-date>
+            <app-sort-by-price (sortByPrice)="updateSortByPrice($event)" [isActive]="isSortActive('price')"
+              class="px-4"></app-sort-by-price>
+            <app-sort-alphabetically (sortAlphabetically)="updateSortByName($event)"
+              [isActive]="isSortActive('name')"></app-sort-alphabetically>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 @for(budget of budgets(); track budget.email){
-<div class="row border p-4 rounded-4 shadow mt-4">
-  <div class="col-12">
-    <p>
-      <strong>Nom:</strong> {{budget.name}}
-    </p>
-    <p>
-      <strong>Telèfon:</strong> {{budget.phone}}
-    </p>
-    <p>
-      <strong>E-mail:</strong> {{budget.email}}
-    </p>
-    <h4>Serveis contractats</h4>
-    <ul>
-      @for(service of budget.services; track $index){
-      <li>{{service}} @if(service === 'Web' && budget.pages && budget.languages) {
-        <span> (Pàgines: {{budget.pages}}, Llengües: {{budget.languages}})</span>
-        }
-      </li>
-      }
-    </ul>
-    <h4 class="fw-bold">Preu total: {{budget.totalPrice}}</h4>
+<div class="row mt-5 mt-4">
+  <div class="col-10 offset-1 border p-4 rounded-4 shadow">
+    <div class="row align-items-center">
+      <div class="col-12 col-md">
+        <h4 class="fw-bold">
+          {{budget.name}}
+        </h4>
+        <span class="text-secondary d-block">
+          {{budget.email}}
+          <br>
+          {{budget.phone}}
+        </span>
+      </div>
+      <div class="col-12 col-md my-3 my-md-0">
+        <p class="fw-bold">Serveis contractats</p>
+        <ul class="mb-0">
+          @for(service of budget.services; track $index){
+          <li>{{service}} @if(service === 'Web' && budget.pages && budget.languages) {
+            <span> (Pàgines: {{budget.pages}}, Llengües: {{budget.languages}})</span>
+            }
+          </li>
+          }
+        </ul>
+      </div>
+      <div class="col text-start text-md-center">
+        <h6 class="fw-bold text-secondary">Total:</h6>
+        <h3 class="fw-bold">
+          {{budget.totalPrice}}<span class="h6">€</span>
+        </h3>
+      </div>
+    </div>
   </div>
 </div>
-}}
+}
+
+}

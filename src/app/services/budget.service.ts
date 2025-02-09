@@ -6,7 +6,26 @@ import { CurrentBudget } from '../interfaces/current-budget';
   providedIn: 'root',
 })
 export class BudgetService {
-  budgetSignal = signal<CurrentBudget[]>([]);
+  budgetSignal = signal<CurrentBudget[]>([
+    {
+      name: 'Joan Pérez',
+      phone: 654321987,
+      email: 'joan@example.com',
+      services: ['Web', 'Seo'],
+      totalPrice: 830,
+      pages: 1,
+      languages: 2,
+      date: new Date('2024-05-15'),
+    },
+    {
+      name: 'Maria García',
+      phone: 612345678,
+      email: 'maria@example.com',
+      services: ['Ads'],
+      totalPrice: 400,
+      date: new Date('2024-08-22'),
+    },
+  ]);
 
   private programmingOptions: BudgetOption[] = [
     {
@@ -30,29 +49,6 @@ export class BudgetService {
   ];
 
   private pageCost = 30;
-
-  constructor() {
-    this.budgetSignal.set([
-      {
-        name: 'Joan Pérez',
-        phone: 654321987,
-        email: 'joan@example.com',
-        services: ['Web', 'Seo'],
-        totalPrice: 830,
-        pages: 1,
-        languages: 2,
-        date: new Date('2024-05-15'),
-      },
-      {
-        name: 'Maria García',
-        phone: 612345678,
-        email: 'maria@example.com',
-        services: ['Ads'],
-        totalPrice: 400,
-        date: new Date('2024-03-22'),
-      },
-    ]);
-  }
 
   getProgrammingOptions(): BudgetOption[] {
     return this.programmingOptions;

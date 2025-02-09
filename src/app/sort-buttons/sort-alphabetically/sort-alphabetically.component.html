@@ -1,3 +1,14 @@
 <button class="btn btn-primary" (click)="toggleSortAlphbetically()">
-  Ordenar alfabèticament {{ isAscending ? '▲' : '▼' }}
+  Nom
+  @if(isActive){
+  <span>
+    @if(isAscending){
+    <i class="bi bi-caret-up-fill"></i>
+    }
+    @if(!isAscending){
+    <i class="bi bi-caret-down-fill"></i>
+    }
+  </span>
+
+  }
 </button>

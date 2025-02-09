@@ -1,26 +1,26 @@
-<div class="container pt-5">
-  <div class="row">
-    <div class="col-12 pb-5">
-      <h1 class="text-center">Aconsegueix la millor qualitat</h1>
+<div class="container pt-5 budget-header">
+  <div class="row pb-4">
+    <div class="col-12 py-5 budget-header__background">
+      <h1 class="budget-header__title">Aconsegueix la millor qualitat</h1>
     </div>
-    <div class="col-12">
-      <form class="form d-flex flex-column gap-3" [formGroup]="budgetFormService.formBudget">
+    <div class="col-10 offset-1">
+      <form class="form d-flex flex-column gap-4 pt-5" [formGroup]="budgetFormService.formBudget">
         @for(option of budgetService.getProgrammingOptions(); track option.id; let lastItem = $last){
         <div class="row p-3"
-          [ngClass]="{'border-checked shadow': budgetFormService.formBudget.get(option.id)?.value, 'mb-5': lastItem}">
+          [ngClass]="{'border-checked shadow': budgetFormService.formBudget.get(option.id)?.value, 'mb-3': lastItem, 'rounded-4 shadow': !budgetFormService.formBudget.get(option.id)?.value}">
           <div class="col-6 d-flex align-items-center">
             <div>
               <h3>{{option.title}}</h3>
               <p>{{ option.description }}</p>
             </div>
           </div>
-          <div class="col-3 d-flex align-items-center justify-content-center">
+          <div class="col-6 col-md-3 d-flex align-items-center justify-content-center">
             <div>
               <span class="fw-prices me-1">
                 {{ option.price }}</span>€
             </div>
           </div>
-          <div class="col-3 d-flex align-items-center justify-content-end">
+          <div class="col-12 col-md-3 d-flex align-items-center justify-content-end">
             <input type="checkbox" name="" [id]="option.id" [formControlName]="option.id"
               (change)="budgetFormService.calculateTotal()">
             <label [for]="option.id" class="ps-2">Afegir</label>
@@ -32,10 +32,8 @@
         }
 
       </form>
-    </div>
 
-    <div class="col-12">
-      <h4 class="text-end fw-bold">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{
+      <h4 class="text-end fw-bold mt-4">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{
           budgetFormService.totalPriceBudget }}</span>€
       </h4>
     </div>
@@ -44,47 +42,59 @@
   @if(budgetFormService.formBudget.get('web')?.value || budgetFormService.formBudget.get('seo')?.value ||
   budgetFormService.formBudget.get('ads')?.value){
   <div class="row mt-4">
-    <div class="col-12">
+    <div class="col-10 offset-1 rounded-4 border shadow p-4">
 
       <form [formGroup]="budgetFormService.formBudget" (ngSubmit)="submitBudget($event)"
-        class="form d-flex flex-column gap-3 rounded-4 border shadow p-4">
+        class="form d-flex flex-column gap-3">
         <h2>
           Demanar pressupost
         </h2>
-        <div class="row">
+        <div class="row align-items-center gap-3 gap-md-0">
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Nom" aria-label="name" formControlName="name">
-            <div
-              *ngIf="budgetFormService.formBudget.get('name')?.invalid && budgetFormService.formBudget.get('name')?.touched"
-              class="error">
+            @if(budgetFormService.formBudget.get('name')?.invalid && budgetFormService.formBudget.get('name')?.touched){
+            <div class="error">
               Nom és obligatori.
             </div>
+
+            }
           </div>
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Telèfon" aria-label="phone" formControlName="phone">
-            <div
-              *ngIf="budgetFormService.formBudget.get('phone')?.invalid && budgetFormService.formBudget.get('phone')?.touched"
-              class="error">
-              <span *ngIf="budgetFormService.formBudget.get('phone')?.errors?.['required']">Teléfono és
+            @if(budgetFormService.formBudget.get('phone')?.invalid &&
+            budgetFormService.formBudget.get('phone')?.touched){
+            <div class="error">
+              @if(budgetFormService.formBudget.get('phone')?.errors?.['required']){
+              <span>Teléfono és
                 obligatori.</span>
-              <span *ngIf="budgetFormService.formBudget.get('phone')?.errors?.['pattern']">Ha de ser telèfon vàlid
+              }
+              @if(budgetFormService.formBudget.get('phone')?.errors?.['pattern']){
+              <span>Ha de ser telèfon vàlid
                 d'almenys 9
                 dígits.</span>
+              }
             </div>
+
+            }
           </div>
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Email" aria-label="email" formControlName="email">
-            <div
-              *ngIf="budgetFormService.formBudget.get('email')?.invalid && budgetFormService.formBudget.get('email')?.touched"
-              class="error">
-              <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['required']">Correo es
+            @if(budgetFormService.formBudget.get('email')?.invalid &&
+            budgetFormService.formBudget.get('email')?.touched){
+            <div class="error">
+              @if(budgetFormService.formBudget.get('email')?.errors?.['required']){
+              <span>Correo es
                 obligatorio.</span>
-              <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['email']">Email no vàlid.</span>
+              }
+              @if(budgetFormService.formBudget.get('email')?.errors?.['email']){
+              <span>Email no vàlid.</span>
+              }
             </div>
+            }
           </div>
-          <div class="col-12 col-md">
-            <button type="submit" class="btn btn-primary mb-3">
-              Sol·licitar pressupost →
+          <div class="col-12 col-md text-end pt-3 pt-md-0">
+            <button type="submit" class="btn btn-primary py-3 py-md-2">
+              Sol·licitar pressupost <img src="assets/icons/request-quote.png" alt="sol·licitar pressupost" width="">
             </button>
           </div>
         </div>
