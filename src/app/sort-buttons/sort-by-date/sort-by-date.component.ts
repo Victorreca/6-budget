@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sort-by-date',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './sort-by-date.component.html',
   styleUrl: './sort-by-date.component.scss',
 })

@@ -1,6 +1,14 @@
 <button class="btn btn-primary" (click)="toggleSortAlphbetically()">
-  Nom <span *ngIf="isActive">
-    <i *ngIf="isAscending" class="bi bi-caret-up-fill"></i>
-    <i *ngIf="!isAscending" class="bi bi-caret-down-fill"></i>
+  Nom
+  @if(isActive){
+  <span>
+    @if(isAscending){
+    <i class="bi bi-caret-up-fill"></i>
+    }
+    @if(!isAscending){
+    <i class="bi bi-caret-down-fill"></i>
+    }
   </span>
+
+  }
 </button>

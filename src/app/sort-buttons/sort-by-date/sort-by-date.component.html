@@ -1,6 +1,14 @@
 <button class="btn btn-primary" (click)="toggleSortByDate()">
-  Data <span *ngIf="isActive">
-    <i *ngIf="isAscending" class="bi bi-caret-up-fill"></i>
-    <i *ngIf="!isAscending" class="bi bi-caret-down-fill"></i>
+  Data
+  @if(isActive){
+  <span>
+    @if(isAscending){
+    <i class="bi bi-caret-up-fill"></i>
+    }
+    @if(!isAscending){
+    <i class="bi bi-caret-down-fill"></i>
+    }
   </span>
+  }
+
 </button>

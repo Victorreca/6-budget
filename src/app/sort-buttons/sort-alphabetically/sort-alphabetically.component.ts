@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sort-alphabetically',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './sort-alphabetically.component.html',
   styleUrl: './sort-alphabetically.component.scss',
 })

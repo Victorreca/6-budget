@@ -1,6 +1,14 @@
 <button class="btn btn-primary" (click)="toggleSortByPrice()">
-  Preu <span *ngIf="isActive">
-    <i *ngIf="isAscending" class="bi bi-caret-up-fill"></i>
-    <i *ngIf="!isAscending" class="bi bi-caret-down-fill"></i>
+  Preu
+  @if(isActive){
+  <span>
+    @if(isAscending){
+    <i class="bi bi-caret-up-fill"></i>
+    }
+    @if(!isAscending){
+    <i class="bi bi-caret-down-fill"></i>
+    }
   </span>
+  }
+
 </button>

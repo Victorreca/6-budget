@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sort-by-price',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './sort-by-price.component.html',
   styleUrl: './sort-by-price.component.scss',
 })

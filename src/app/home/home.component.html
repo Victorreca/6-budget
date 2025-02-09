@@ -52,33 +52,45 @@
         <div class="row align-items-center gap-3 gap-md-0">
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Nom" aria-label="name" formControlName="name">
-            <div
-              *ngIf="budgetFormService.formBudget.get('name')?.invalid && budgetFormService.formBudget.get('name')?.touched"
-              class="error">
+            @if(budgetFormService.formBudget.get('name')?.invalid && budgetFormService.formBudget.get('name')?.touched){
+            <div class="error">
               Nom és obligatori.
             </div>
+
+            }
           </div>
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Telèfon" aria-label="phone" formControlName="phone">
-            <div
-              *ngIf="budgetFormService.formBudget.get('phone')?.invalid && budgetFormService.formBudget.get('phone')?.touched"
-              class="error">
-              <span *ngIf="budgetFormService.formBudget.get('phone')?.errors?.['required']">Teléfono és
+            @if(budgetFormService.formBudget.get('phone')?.invalid &&
+            budgetFormService.formBudget.get('phone')?.touched){
+            <div class="error">
+              @if(budgetFormService.formBudget.get('phone')?.errors?.['required']){
+              <span>Teléfono és
                 obligatori.</span>
-              <span *ngIf="budgetFormService.formBudget.get('phone')?.errors?.['pattern']">Ha de ser telèfon vàlid
+              }
+              @if(budgetFormService.formBudget.get('phone')?.errors?.['pattern']){
+              <span>Ha de ser telèfon vàlid
                 d'almenys 9
                 dígits.</span>
+              }
             </div>
+
+            }
           </div>
           <div class="col-12 col-md">
             <input type="text" class="form-control" placeholder="Email" aria-label="email" formControlName="email">
-            <div
-              *ngIf="budgetFormService.formBudget.get('email')?.invalid && budgetFormService.formBudget.get('email')?.touched"
-              class="error">
-              <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['required']">Correo es
+            @if(budgetFormService.formBudget.get('email')?.invalid &&
+            budgetFormService.formBudget.get('email')?.touched){
+            <div class="error">
+              @if(budgetFormService.formBudget.get('email')?.errors?.['required']){
+              <span>Correo es
                 obligatorio.</span>
-              <span *ngIf="budgetFormService.formBudget.get('email')?.errors?.['email']">Email no vàlid.</span>
+              }
+              @if(budgetFormService.formBudget.get('email')?.errors?.['email']){
+              <span>Email no vàlid.</span>
+              }
             </div>
+            }
           </div>
           <div class="col-12 col-md text-end pt-3 pt-md-0">
             <button type="submit" class="btn btn-primary py-3 py-md-2">
