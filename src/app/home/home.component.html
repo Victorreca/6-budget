@@ -1,12 +1,12 @@
 <div class="container pt-5 budget-header">
   <div class="row pb-4">
-    <div class="col-12 py-5 budget-header__background">
+    <header class="col-12 py-5 budget-header__background">
       <h1 class="budget-header__title">Aconsegueix la millor qualitat</h1>
-    </div>
-    <div class="col-10 offset-1">
+    </header>
+    <section class="col-10 offset-1">
       <form class="form d-flex flex-column gap-4 pt-5" [formGroup]="budgetFormService.formBudget">
         @for(option of budgetService.getProgrammingOptions(); track option.id; let lastItem = $last){
-        <div class="row p-3"
+        <article class="row p-3"
           [ngClass]="{'border-checked shadow': budgetFormService.formBudget.get(option.id)?.value, 'mb-3': lastItem, 'rounded-4 shadow': !budgetFormService.formBudget.get(option.id)?.value}">
           <div class="col-6 d-flex align-items-center">
             <div>
@@ -28,7 +28,7 @@
           @if (option.id === 'web' && budgetFormService.formBudget.get('web')?.value) {
           <app-panel (updatePagesAndLanguages)="panelUpdate($event)"></app-panel>
           }
-        </div>
+        </article>
         }
 
       </form>
@@ -36,14 +36,13 @@
       <h4 class="text-end fw-bold mt-4">Preu pressuposat: <span class="fw-prices me-1 ms-4">{{
           budgetFormService.totalPriceBudget }}</span>€
       </h4>
-    </div>
+    </section>
   </div>
 
   @if(budgetFormService.formBudget.get('web')?.value || budgetFormService.formBudget.get('seo')?.value ||
   budgetFormService.formBudget.get('ads')?.value){
-  <div class="row mt-4">
+  <section class="row mt-4">
     <div class="col-10 offset-1 rounded-4 border shadow p-4">
-
       <form [formGroup]="budgetFormService.formBudget" (ngSubmit)="submitBudget($event)"
         class="form d-flex flex-column gap-3">
         <h2>
@@ -100,6 +99,6 @@
         </div>
       </form>
     </div>
-  </div>
+  </section>
   }
   <app-budgets-list></app-budgets-list>
