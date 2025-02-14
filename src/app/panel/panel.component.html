@@ -6,26 +6,27 @@
     Número de pàgines
     <app-popup #popup></app-popup>
 
-    <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberPages()" [disabled]="numberPages <= 1"
-      [ngClass]="{'opacity-25 not-allowed': numberPages <= 1}"><img src="assets/icons/signo-menos.png"
-        width="20"></button>
+    <button type="button" class="border-0 bg-transparent" (click)="changeNumber('numberPages', 'decrease')"
+      [disabled]="numberPages <= 1" [ngClass]="{'opacity-25 not-allowed': numberPages <= 1}"><img
+        src="assets/icons/signo-menos.png" width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
       {{numberPages}}
     </span>
-    <button type="button" class="border-0 bg-transparent" (click)="increaseNumberPages()"><img
+    <button type="button" class="border-0 bg-transparent" (click)="changeNumber('numberPages', 'increase')"><img
         src="assets/icons/mas.png" width="20"></button>
   </span>
   <span class="d-block">
     <button type="button" class="info-btn border-0 bg-transparent" (click)="popup.openPopup('languages')">
       <img src="assets/icons/info-icon.png" alt="Informació de pàgines" width="20">
     </button>
-    Número d'idiomes <button type="button" class="border-0 bg-transparent" (click)="decreaseNumberLanguages()"
-      [disabled]="numberLanguages <= 1" [ngClass]="{'opacity-25 not-allowed': numberLanguages <= 1}"><img
-        src="assets/icons/signo-menos.png" width="20"></button>
+    Número d'idiomes <button type="button" class="border-0 bg-transparent"
+      (click)="changeNumber('numberLanguages', 'decrease')" [disabled]="numberLanguages <= 1"
+      [ngClass]="{'opacity-25 not-allowed': numberLanguages <= 1}"><img src="assets/icons/signo-menos.png"
+        width="20"></button>
     <span class="border rounded px-3 py-1 fw-bold">
       {{numberLanguages}}
     </span>
-    <button type=" button" class="border-0 bg-transparent" (click)="increaseNumberLanguages()"><img
+    <button type=" button" class="border-0 bg-transparent" (click)="changeNumber('numberLanguages', 'increase')"><img
         src="assets/icons/mas.png" width="20"></button>
   </span>
 </div>

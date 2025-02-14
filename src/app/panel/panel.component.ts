@@ -27,28 +27,16 @@ export class PanelComponent implements OnInit {
       this.budgetFormService.formBudget.get('languages')?.value || 1;
   }
 
-  increaseNumberPages() {
-    this.numberPages++;
-    this.updateFormValues();
-  }
-
-  decreaseNumberPages() {
-    if (this.numberPages > 1) {
-      this.numberPages--;
-      this.updateFormValues();
+  changeNumber(
+    type: 'numberPages' | 'numberLanguages',
+    operation: 'increase' | 'decrease'
+  ) {
+    if (operation === 'increase') {
+      this[type]++;
+    } else if (operation === 'decrease' && (this[type] as number) > 1) {
+      this[type]--;
     }
-  }
-
-  increaseNumberLanguages() {
-    this.numberLanguages++;
     this.updateFormValues();
-  }
-
-  decreaseNumberLanguages() {
-    if (this.numberLanguages > 1) {
-      this.numberLanguages--;
-      this.updateFormValues();
-    }
   }
 
   private updateFormValues() {
